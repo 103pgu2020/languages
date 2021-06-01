@@ -1,1 +1,1 @@
-https://telegra.ph/Usloviya-zadach-po-YAiMP-03-31
+Условия: https://telegra.ph/Usloviya-zadach-po-YAiMP-03-31
