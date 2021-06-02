@@ -1,5 +1,5 @@
-﻿using System;
-namespace ConsoleApplication59
+using System;
+namespace Program1
 {
     class Program
     {
@@ -31,7 +31,7 @@ namespace ConsoleApplication59
                 Console.Clear();
                 goto m1;
             }
-            Console.ReadKey();
+            return;
         }
     }
 }
