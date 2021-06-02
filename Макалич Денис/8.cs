@@ -5,7 +5,7 @@ namespace Program1
     {
         static void Main(string[] args)
         {
-        m:  
+        m:
             Console.WriteLine("Введите число:");
             int N = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Цифры, которые отсутствуют:");
@@ -21,7 +21,8 @@ namespace Program1
                 if (k != i)
                     Console.Write(i + " ");
             }
-            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            Console.WriteLine();
+            Console.WriteLine("1-продолжить, любое другое число-закончить программу");
             int x = Int32.Parse(Console.ReadLine());
             if (x == 1)
             {
