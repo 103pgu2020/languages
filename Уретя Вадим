@@ -1,1 +1,34 @@
+using System;
+
+
+namespace _01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        /*Вычислить количество цифр в данном числе.*/
+        m: Console.Write("\nВведите целое число: ");
+            int count = 0;
+            double number = Convert.ToDouble(Console.ReadLine());
+            if (number != (int)number)
+            {
+                Console.WriteLine("Число не целое");
+                goto m;
+            }
+            int number1 = (int)number;
+            while (number1 != 0)
+            {
+                number1 /= 10;
+                count++;
+            }
+            Console.WriteLine("Количество цифр: " + count);
+            Console.WriteLine("\nЕщё раз? 1- да, любое другое значение- нет");
+            count = Convert.ToInt32(Console.ReadLine());
+            if (count == 1)
+                goto m;
+            return;
+        }
+    }
+}
 
