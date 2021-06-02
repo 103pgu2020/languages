@@ -1,12 +1,11 @@
-﻿using System;
+using System;
 namespace Program1
 {
     class Program
     {
         static void Main(string[] args)
         {
-        m:
-            Console.Clear();
+        m:  
             Console.WriteLine("Введите число:");
             int N = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Цифры, которые отсутствуют:");
@@ -25,7 +24,11 @@ namespace Program1
             Console.WriteLine("\nPress 1 for restart, any other - exit.");
             int x = Int32.Parse(Console.ReadLine());
             if (x == 1)
+            {
+                Console.Clear();
                 goto m;
+            }
+            return;
         }
     }
 }
