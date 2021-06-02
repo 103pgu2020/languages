@@ -72,5 +72,757 @@ namespace _2
 
 }
 
+namespace _3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+            Console.WriteLine("Вводите последовательность:");
+            int k = 0;
+            double i, j = 0;
+            while ((i = Double.Parse(Console.ReadLine())) != 0)
+            {
+                if (i * j < 0)
+                    k++;
+                j = i;
+            }
+            Console.WriteLine("Количество смен знаков: " + k);
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            k = Int32.Parse(Console.ReadLine());
+            if (k == 1)
+                goto st;
+        }
+    }
+}
+
+
+namespace _4
+{
+    class Program
+    {
+        static void Output(int hh, int mm, int ss)
+        {
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 4, Console.WindowHeight / 2 - 1);
+            Console.WriteLine("{0:00}:{1:00}:{2:00}", hh, mm, ss);
+        }
+        static void Save(int hh, int mm, int ss, ref int k)
+        {
+            Console.SetCursorPosition(0, k);
+            Console.WriteLine("{0:00}:{1:00}:{2:00}", hh, mm, ss);
+            k++;
+        }
+        static void Main(string[] args)
+        {
+            Console.CursorVisible = false;
+            Console.Title = "Секундомер";
+
+
+        main:
+            Console.Clear();
+            Console.SetCursorPosition(Console.WindowWidth - 12, 0);
+            Console.WriteLine("Version 1.0");
+            int hh = 0, mm = 0, ss = 0, k = 0;
+
+
+            Output(hh, mm, ss);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 11, Console.WindowHeight / 2);
+            Console.WriteLine("Press SPACE for start");
+            ConsoleKeyInfo key;
+            do
+            {
+                Console.SetCursorPosition(Console.WindowWidth / 2 - 11, Console.WindowHeight / 2 + 1);
+                key = Console.ReadKey();
+                Console.SetCursorPosition(Console.WindowWidth / 2 - 11, Console.WindowHeight / 2 + 1);
+                Console.Write(" ");
+            }
+            while (key.Key != ConsoleKey.Spacebar);
+
+
+        start:
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 21, Console.WindowHeight / 2);
+            Console.WriteLine("                                                     ");
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 15, Console.WindowHeight / 2);
+            Console.WriteLine("Press 1(stop) 2(save) 0(exit)");
+
+
+            while (!Console.KeyAvailable)
+            {
+                System.Threading.Thread.Sleep(970);
+                ss++;
+                if (ss == 60)
+                {
+                    mm++;
+                    ss = 0;
+                }
+                if (mm == 60)
+                {
+                    hh++;
+                    mm = 0;
+                }
+                Output(hh, mm, ss);
+            }
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 11, Console.WindowHeight / 2 + 1);
+            key = Console.ReadKey();
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 11, Console.WindowHeight / 2 + 1);
+            Console.Write(" ");
+
+
+            if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1)
+                goto pause;
+            if (key.Key == ConsoleKey.D2 || key.Key == ConsoleKey.NumPad2)
+                Save(hh, mm, ss - 1, ref k);
+            if (key.Key == ConsoleKey.D0 || key.Key == ConsoleKey.NumPad0)
+                goto exit;
+            goto start;
+
+
+        pause:
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 21, Console.WindowHeight / 2);
+            Console.WriteLine("                                                     ");
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 21, Console.WindowHeight / 2);
+            Console.WriteLine("Press 1(restart) 2(resume) 3(save) 0(exit)");
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 11, Console.WindowHeight / 2 + 1);
+            key = Console.ReadKey();
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 11, Console.WindowHeight / 2 + 1);
+            Console.Write(" ");
+            if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1)
+                goto main;
+            if (key.Key == ConsoleKey.D2 || key.Key == ConsoleKey.NumPad2)
+                goto start;
+            if (key.Key == ConsoleKey.D3 || key.Key == ConsoleKey.NumPad3)
+                Save(hh, mm, ss, ref k);
+            if (key.Key == ConsoleKey.D0 || key.Key == ConsoleKey.NumPad0)
+                goto exit;
+            goto pause;
+
+
+        exit:
+            System.Threading.Thread.Sleep(1);
+        }
+    }
+}
+
+
+namespace _5
+{
+    class Program
+    {
+        static void Output(int[] M)
+        {
+            for (int i = 0; i < 10; i++)
+                Console.Write(M[i] + " ");
+            Console.WriteLine();
+        }
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+            int[] A = new int[10];
+            int[] B = new int[10];
+            int[] C = new int[10];
+            Random random = new Random();
+            int s1 = 0, s2 = 0, s3 = 0;
+            double sr1, sr2, sr3;
+            for (int i = 0; i < 10; i++)
+            {
+                A[i] = random.Next(-20, 21);
+                s1 += A[i];
+                B[i] = random.Next(-20, 21);
+                s2 += B[i];
+                C[i] = random.Next(-20, 21);
+                s3 += C[i];
+            }
+            sr1 = s1 / 10.0;
+            sr2 = s2 / 10.0;
+            sr3 = s3 / 10.0;
+            Console.WriteLine("Первый массив:");
+            Output(A);
+            Console.WriteLine("Среднее арифметическое: " + sr1);
+            Console.WriteLine("Первый массив:");
+            Output(B);
+            Console.WriteLine("Среднее арифметическое: " + sr2);
+            Console.WriteLine("Первый массив:");
+            Output(C);
+            Console.WriteLine("Среднее арифметическое: " + sr3);
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            s1 = Int32.Parse(Console.ReadLine());
+            if (s1 == 1)
+                goto st;
+        }
+    }
+}
+
+
+
+namespace _6
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+            Console.WriteLine("Введите N:");
+            int N = Int16.Parse(Console.ReadLine());
+            if (N < 2)
+                Console.WriteLine("Таких чисел нет!");
+            else
+            {
+                Console.WriteLine("Подходящие числа:");
+                for (int i = 100; i <= 999; i++)
+                {
+                    if (i % 10 + i / 100 + i % 100 / 10 < N)
+                        Console.Write(i + " ");
+                }
+            }
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            N = Int32.Parse(Console.ReadLine());
+            if (N == 1)
+                goto st;
+        }
+    }
+}
+
+namespace _7
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+            Console.WriteLine("Подходящие числа:");
+            for (int i = 100; i <= 999; i++)
+            {
+                int s = i / 100;
+                int d = i / 10 % 10;
+                int e = i % 10;
+                if ((s == d || d == e || s == e) && i % 111 != 0)
+                    Console.Write(i + " ");
+            }
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
+
+namespace _8
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+            Console.WriteLine("Введите N:");
+            int N = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Искомые цифры:");
+            for (int i = 9; i >= 0; i--)
+            {
+                int n = N;
+                int p = 10;
+                while (n != 0 && p != i)
+                {
+                    p = n % 10;
+                    n = n / 10;
+                }
+                if (p != i)
+                    Console.Write(i + " ");
+            }
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
+
+namespace _9
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        Console.Write(" ");
+                        Console.Write("*");
+                    }
+                    else
+                    {
+                        Console.Write("*");
+                        Console.Write(" ");
+                    }
+                }
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+        }
+    }
+}
+
+
+namespace _10
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //st:
+            Console.Clear();
+
+
+            for (int i = 0; i <= 10; i++)
+            {
+                for (int j = 0; j <= 10; j++)
+                    if (i + j == 0)
+                        Console.Write("    ");
+                    else if (i * j == 0)
+                        Console.Write("{0,4}", i + j);
+                    else
+                        Console.Write("{0,4}", i * j);
+                Console.WriteLine('\n');
+            }
+
+
+            Console.SetCursorPosition(0, 1);
+            Console.Write(new String('-', 44));
+            for (int i = 0; i < 21; i++)
+            {
+                Console.SetCursorPosition(5, i);
+                Console.Write("|");
+            }
+            Console.SetCursorPosition(5, 1);
+            Console.Write("+");
+            Console.SetCursorPosition(0, 21);
+            
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+            
+        }
+    }
+}
+
+
+namespace _11
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+
+
+            Console.WriteLine("Введите время, в которое начинается учебный день в формате ЧЧ:ММ");
+            string str = Console.ReadLine();
+            int h = Convert.ToInt32(str.Substring(0, 2));
+            int m = Convert.ToInt32(str.Substring(3));
+            int s = h * 60 + m;
+            Console.WriteLine("Введите количество уроков (пар):");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите длительность уроков (пар) в минутах:");
+            h = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите длительность перемен в минутах:");
+            m = Convert.ToInt32(Console.ReadLine());
+
+
+            for (int i = 1; i <= n; i++, s = (s + h) % 1440 + m)
+                Console.WriteLine(i + " урок: {0:00}:{1:00} - {2:00}:{3:00}", s / 60, s % 60, (s + h) / 60 % 24, (s + h) % 60);
+
+
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
+
+
+namespace _12
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+
+
+            int N = 0;
+            while (N < 1)
+            {
+                Console.WriteLine("Введите натуральное число:");
+                N = Int32.Parse(Console.ReadLine());
+            }
+
+
+            Console.WriteLine("Делители:");
+            int k = 0;
+            for (int i = 1; i <= N / 2; i++)
+            {
+                if (N % i == 0)
+                {
+                    Console.Write(i + " ");
+                    k++;
+                }
+            }
+            Console.Write(N);
+            k++;
+            Console.WriteLine("\nКоличество делителей: " + k);
+
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
+
+ 
+namespace _13
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+
+
+            int N = 0;
+            while (N < 1)
+            {
+                Console.WriteLine("Введите натуральное число:");
+                N = Int32.Parse(Console.ReadLine());
+            }
+
+
+            Console.WriteLine("Простые числа меньше заданного:");
+            int k = 0;
+            for (int i = 2; i < N; i++)
+            {
+                if ((i < 4 || (i + 1) % 6 == 0 || (i - 1) % 6 == 0) && (i == 5 || i % 5 != 0) && (i == 7 || i % 7 != 0))
+                {
+                    Console.Write(i + " ");
+                    k++;
+                }
+            }
+            if (k == 0)
+                Console.WriteLine("Простые числа не найдены!");
+
+
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
+
+namespace _14
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+
+
+            int N = 0;
+            while (N < 1)
+            {
+                Console.WriteLine("Введите натуральное число:");
+                N = Int32.Parse(Console.ReadLine());
+            }
+            Console.WriteLine("Введите действительное число:");
+            double x = Double.Parse(Console.ReadLine());
+
+
+            double S = 0;
+            for (int i = 1; i <= N; i += 2)
+            {
+                int f = 1;
+                for (int j = 2; j <= i; j++)
+                    f *= j;
+                if ((i + 1) % 4 == 2)
+                    S += Math.Pow(x, i) / f;
+                else
+                    S -= Math.Pow(x, i) / f;
+            }
+            Console.WriteLine("Сумма ряда: " + S);
+
+
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int p = Int32.Parse(Console.ReadLine());
+            if (p == 1)
+                goto st;
+        }
+    }
+}
+
+
+namespace _15
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+
+            int k = 0;
+            int f = 1, s = 0;
+            while (k < 1)
+            {
+                Console.WriteLine("Введите натуральное число:");
+                k = Int32.Parse(Console.ReadLine());
+            }
+
+            Console.WriteLine("Числа Фибоначчи ({0} штук):", k);
+            for (int i = 1; i <= k; i++)
+            {
+                f = (s += f) - f;
+                Console.Write(f + " ");
+            }
+
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
+
+namespace _16
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+
+
+            Random random = new Random();
+            int N = random.Next(1000) + 1;
+
+
+            Console.WriteLine("Привет, Игрок! Твоя цель угадать число от 1 до 1000 за 10 попыток.");
+
+            for (int i = 1; i <= 10; i++)
+            {
+                Console.WriteLine("Попытка №" + i);
+                Console.WriteLine("Введите число:");
+                int y = Int32.Parse(Console.ReadLine());
+                if (y == N)
+                {
+                    Console.WriteLine("Угадал(а)");
+                    break;
+                }
+                else
+                    Console.WriteLine("Загаданное число " + (N > y ? "больше" : "меньше"));
+                Console.WriteLine();
+            }
+
+
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
+
+namespace _17
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+
+
+            Random random = new Random();
+
+
+            Console.WriteLine("Проверка знания таблицы");
+            int k = 0;
+
+
+            for (int i = 1; i <= 10; i++)
+            {
+                int a = random.Next(-20, 21);
+                int b = random.Next(-20, 21);
+                Console.WriteLine("Вопрос {0}.\n({1})*({2})=", i, a, b);
+                int p = Int32.Parse(Console.ReadLine());
+                if (p == a * b)
+                {
+                    Console.WriteLine("Ответ верный!\n");
+                    k++;
+                }
+                else
+                    Console.WriteLine("Ответ неверный!\n");
+            }
+            Console.WriteLine("Набрано {0} баллов.", k);
+            Console.Write("Результат: ");
+            if (k < 6)
+                Console.WriteLine("незачёт!");
+            else if (k < 8)
+                Console.WriteLine("удовлетворительно!");
+            else if (k < 10)
+                Console.WriteLine("хорошо!");
+            else
+                Console.WriteLine("отлично!");
+
+
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
+
+
+namespace _18
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+
+
+            int N = 2;
+
+
+            int m = -1;
+            while (m < 0)
+            {
+                Console.WriteLine("Введите количество минут (неотрицательное число):");
+                m = Int32.Parse(Console.ReadLine());
+            }
+
+            N *= (int)Math.Pow(2, m / 10 - m / 30);
+
+
+            Console.WriteLine("Антител в сосуде через {0} минут(у)(ы): {1}", m, N);
+
+
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
+
+namespace _19
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+
+
+            int N = 0;
+            while (N < 1 || N > 3999)
+            {
+                Console.WriteLine("Введите количество минут (натуральное число меньшее, чем 4000):");
+                N = Int32.Parse(Console.ReadLine());
+            }
+
+
+            string arn = new string("IVXLCDM");
+            string rN = "";
+            int c = N;
+            int i = 0;
+
+
+            while (c != 0)
+            {
+                int t = c % 10;
+                if (t != 0)
+                {
+                    string ed = new string(arn[i], (t % 5 - 1) % 3 + 1);
+                    string d = new string(arn[i + (t + 1) / 5], (t + 2) / 6);
+                    rN = ((t + 1) % 5 == 0 ? ed + d : d + ed) + rN;
+                }
+                i += 2;
+                c /= 10;
+            }
+            Console.WriteLine(rN);
+
+
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
+
+
+
+namespace _20
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        st:
+            Console.Clear();
+
+
+            double N = 0;
+            while (N < 1)
+            {
+                Console.WriteLine("Введите порог расстояния в км (>0):");
+                N = Double.Parse(Console.ReadLine());
+            }
+
+
+            Console.WriteLine("Мили    |Км");
+            Console.WriteLine(new String('-', 8) + "+" + new String('-', 8));
+
+
+            double km = 1.609344;
+            double s = km;
+            for (int i = 1; i <= N; i++)
+            {
+                Console.WriteLine("{0, 8:0.0000}|{1, 8:0.0000}", i / km, i);
+                if (s - i < 1 && s - i > 0 && s <= N)
+                {
+                    Console.WriteLine("{0, 8:0.0000}|{1, 8:0.0000}", s / km, s);
+                    s += km;
+                }
+            }
+
+
+            Console.WriteLine("\nPress 1 for restart, any other - exit.");
+            int x = Int32.Parse(Console.ReadLine());
+            if (x == 1)
+                goto st;
+        }
+    }
+}
 
 
