@@ -17,7 +17,7 @@ namespace ConsoleApp1
 			k = Math.Abs(k);
 			count = (int)Math.Log10(k) + 1;
 			Console.WriteLine("Количество цифр в данном числе " + count);
-			Console.WriteLine("Повторить? 1-Да; Любое другое число-нет.");
+			Console.WriteLine("Повторить? 1-Да; 0-нет.");
 			int a = Convert.ToInt32(Console.ReadLine());
 			if (a == 1)
 				goto m;
