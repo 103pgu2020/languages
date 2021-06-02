@@ -1,5 +1,5 @@
-﻿using System;
-namespace ConsoleApplication
+using System;
+namespace Program1
 {
     class Program
     {
@@ -32,13 +32,13 @@ namespace ConsoleApplication
                 h = (h + (m + m2) / 60) % 24;
                 m = (m + m2) % 60;
             }
-            Console.Write("Продолжить? (1 - да, другоче число - нет) ");
+            Console.WriteLine("Продолжить? (1 - да, другоче число - нет) ");
             if (Console.ReadLine() == "1")
             {
                 Console.Clear();
                 goto m1;
             }
-            Console.ReadKey();
+            return;
         }
     }
 }
